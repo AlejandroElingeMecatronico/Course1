@@ -10,8 +10,10 @@
 #*****************************************************************************
 
 # Add your Source files to this variable
-SOURCES = ./main.c \
-				./memory.c 			
+SOURCES = 		./src/main.c \
+				./src/memory.c \
+				./src/course1.c \
+				./src/stats.c 			
 # Add your include paths to this variable
-INCLUDES = -I ../include/msp432 -I ../include/common -I../include/CMSIS 
+INCLUDES = -I/include/msp432 -I/include/common -I/include/CMSIS 
 

@@ -24,6 +24,8 @@
 include sources.mk
 
 PLATFORM=HOST
+VERBOSE=VERBOSE
+COURSE1=COURSE1
 
 #FLAGS_BOTH 
 CFLAGS_BOTH= -g \
@@ -32,7 +34,7 @@ CFLAGS_BOTH= -g \
 				-O0 \
 				-Wall 
 #TARGET FOT BOTH
-TARGET = c1m2
+TARGET = final_assessment
 
 # Platform ARM
 ifeq ($(PLATFORM),MSP432)

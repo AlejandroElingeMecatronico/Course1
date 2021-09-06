@@ -1,0 +1,124 @@
+Requisitos de archivo
+
+Para esta parte, agregará algunos archivos nuevos y un nuevo código a algunos archivos existentes. Construirá a partir de su trabajo anterior de este curso, incluido el uso de su sistema de compilación del módulo 2. Todo el código proporcionado debe ser su propio trabajo. Puede mover sus archivos MAKE o agregar varios archivos MAKE si así lo desea. No puede utilizar ningún código de ejemplo en línea o código escrito previamente.
+
+main.c
+
+Tu función principal será muy sencilla. Solo necesitará llamar a una función que está definida en el archivo fuente course1.c. Sin embargo, debe utilizar un conmutador de tiempo de compilación para ajustar esta función a la llamada. De esta manera podemos tener una función main () simple que puede cambiar qué entregable de curso deseamos llamar especificando el interruptor de tiempo de compilación -DCOURSE1 .
+
+#ifdef COURSE1
+  course1();
+#endif
+
+stats.c / stats.h
+
+Necesita modificar su función print_array () en stats.c para que pueda habilitar / deshabilitar la impresión de depuración con un interruptor de tiempo de compilación. Este conmutador de tiempo de compilación debe habilitarse con un indicador VERBOSE en el archivo MAKE ( -DVERBOSE ). Si está habilitada, la función print_array debería imprimirse normalmente. Si no está definido, no se debería imprimir nada. Además, debe modificar su uso de printf para usar la macro PRINTF definida en platform.h.
+
+memory.c / memory.h Requisitos
+menos 
+Este archivo ya debería tener algunas opciones básicas de movimiento de memoria. Ahora agregaremos algunas funciones de manipulación de memoria.
+
+uint8_t * my_memmove (uint8_t * src, uint8_t * dst, size_t longitud);
+
+Esta función toma dos punteros de bytes (uno de origen y otro de destino) y una longitud de bytes para moverse desde la ubicación de origen al destino.
+El comportamiento debe manejar la superposición de origen y destino. Debería realizarse una copia, sin que se dañen los datos.
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+Debe devolver un puntero al destino (dst).
+uint8_t * my_memcopy (uint8_t * src, uint8_t * dst, size_t longitud);
+
+Esta función toma dos punteros de bytes (uno de origen y otro de destino) y una longitud de bytes para copiar desde la ubicación de origen al destino.
+El comportamiento no está definido si hay superposición de origen y destino. La copia aún debería ocurrir, pero probablemente dañará sus datos.
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+Debe devolver un puntero al destino (dst).
+uint8_t * my_memset (uint8_t * src, tamaño_t longitud, valor uint8_t);
+
+Esto debería llevar un puntero a una ubicación de la memoria de origen, una longitud en bytes y establecer todas las ubicaciones de esa memoria en un valor dado.
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+Debería devolver un puntero a la fuente (src).
+NO debe reutilizar la función set_all ()
+uint8_t * my_memzero (uint8_t * src, tamaño_t longitud);
+
+Esto debería llevar un puntero a una ubicación de memoria, una longitud en bytes y poner a cero toda la memoria.
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+Debería devolver un puntero a la fuente (src).
+NO debe reutilizar la función clear_all ()
+uint8_t * my_reverse (uint8_t * src, tamaño_t longitud);
+
+Esto debería llevar un puntero a una ubicación de memoria y una longitud en bytes e invertir el orden de todos los bytes.
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+Debería devolver un puntero a la fuente.
+int32_t * reserve_words (tamaño_t longitud);
+
+Esto debería tomar una cantidad de palabras para asignar en la memoria dinámica
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+Debe devolver un puntero a la memoria si tiene éxito, o un puntero nulo si no tiene éxito
+void free_words (int32_t * src);
+
+Debería liberar una asignación de memoria dinámica proporcionando el puntero src a la función
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+data.c / data.h Requisitos
+menos 
+Este archivo debería realizar una manipulación de datos muy básica.
+
+uint8_t my_itoa (int32_t datos, uint8_t * ptr, uint32_t base)
+
+Integer-to-ASCII necesita convertir datos de un tipo de entero estándar en una cadena ASCII .
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+El número que desea convertir se pasa como un entero de 32 bits con signo.
+Debería poder admitir las bases 2 a 16 especificando el valor entero de la base a la que desea convertir (base).
+Copie la cadena de caracteres convertida al puntero uint8_t * pasado como parámetro (ptr)
+El número de 32 bits con signo tendrá un tamaño de cadena máximo (Sugerencia: piense en la base 2).
+Debe colocar un terminador nulo al final de la cadena c convertida
+La función debe devolver la longitud de los datos convertidos (incluido un signo negativo). Ejemplo my_itoa (ptr, 1234, 10) debería devolver una longitud de cadena ASCII de 5 (incluido el terminador nulo).
+Esta función necesita manejar datos firmados.
+No puede utilizar ninguna función de cadena o biblioteca.
+int32_t my_atoi (uint8_t * ptr, uint8_t dígitos, uint32_t base)
+
+ASCII-to-Integer necesita convertir los datos de una cadena representada en ASCII a un tipo entero.
+Todas las operaciones deben realizarse utilizando aritmética de punteros, no indexación de matrices
+La cadena de caracteres a convertir se pasa como un puntero uint8_t * (ptr).
+El número de dígitos de su juego de caracteres se pasa como un entero uint8_t (dígitos).
+Debería poder soportar las bases 2 a 16.
+Se debe devolver el entero de 32 bits con signo convertido.
+Esta función necesita manejar datos firmados.
+No puede utilizar ninguna función de cadena o biblioteca.
+course1.c / course.h Requisitos
+menos 
+Estos archivos son nuevos y contendrán algunas funciones de evaluación final del curso. Se le proporcionarán estos archivos de su archivo zip de evaluación.
+
+int8_t course1 ();
+
+Para esta función, necesitará llamar a un puñado de funciones y probar sus salidas de función. Solo necesita llamar a cada una de las siguientes funciones una vez. Estos incluyen test_data1 (), test_data2 (), test_memmove1 (), test_memmove2 (), test_memmove3 (), test_memcopy (), test_memset () y test_reverse ().
+
+int8_t test_data1 ();
+
+Esta función probará las conversiones de atoi e itoa por usted.
+
+int8_t test_data2 ();
+
+Esta función probará las conversiones de atoi e itoa por usted.
+
+int8_t test_memmove1 ();
+
+Esta función probará memmove no superpuesto.
+
+int8_t test_memmove2 ();
+
+Esta función probará memmove superpuesto donde hay superposición del final del destino y el inicio de las regiones de origen.
+
+int8_t test_memmove3 ();
+
+Esta función probará memmove superpuesto donde hay superposición del inicio del destino y el final de las regiones de origen.
+
+int8_t test_memcopy ();
+
+Esta función probará Memcopy.
+
+int8_t test_memset ();
+
+Esta función probará memset y memzero.
+
+iInt8_t test_reverse ();
+
+Esta función probará en reversa.
+

@@ -54,7 +54,9 @@ void main() {
   int maximum,minimum,median;                             
   /* Statistics and Printing Functions Go Here */
   printf("unordered array-[Position]/Value: ");
-  print_array(test, SIZE);
+  #ifdef VERBOSE
+    print_array(test, SIZE);
+  #endif  
   mean = find_mean(test , SIZE);                              
   maximum = find_maximum(test , SIZE);
   minimum = find_minimum(test , SIZE);
