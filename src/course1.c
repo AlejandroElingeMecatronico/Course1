@@ -12,8 +12,8 @@
  * @file course1.c 
  * @brief This file is to be used to course 1 final assessment.
  *
- * @author Alex Fosdick
- * @date April 2, 2017
+ *@author AlejandroElingeMecatronico
+ * @date 12-09-21
  *
  */
 

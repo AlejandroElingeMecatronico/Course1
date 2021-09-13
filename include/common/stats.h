@@ -22,31 +22,69 @@
 #define __STATS_H__
 
 
-/*Functions for statistical calculation: 
-* float find_mean ();
-* int find_maximum ();
-* int find_minimum ();
-* int find_median();
-*/
 /**
- * @brief Basic statistical calculations on an array of SIZE = 40 elements unsigned char.
- *
- * The functions take an unsigned character pointer array and an integer of value 40, performing the calculation of:
- * -median: a float returns.
- * -median: returns an integer.
- * -maximum: returns an integer
- * -minimum: returns an integer.
- * Function to print statistical results:
- * -void print_statistics()
- *  The function takes the calculated values of the previously named ones and prints the results to the screen.
- * Functions to print the array:
- * void print_array ()
- * void sort_array ()
- * The functions take an unsigned character pointer array and an integer of value 40:
- * -print_array : Print the array.
- * -sort_array : Sort the elements contained in the array in descending order.
+ * @brief Print out all the statistics related to the array
  * 
+ * @param arrayPtr Pointer to the array of data
+ * @param arrayLength Number of elements in the array
+ * 
+ * @return Void()
  */
+void print_statistics(uint8_t *ptr, uint8_t length);
+
+/**
+ * @brief Prints the array
+ * 
+ * @param arrayPtr Pointer to the array of data
+ * @param arrayLength Number of elements in the array
+ * 
+ * @return Void()
+ */
+void print_array(uint8_t *ptr, uint8_t length);
+
+/**
+ * @brief Sorts the array inplace from largest (index 0) to smallest (index n-1)
+ * 
+ * @param arrayPtr Pointer to the array of data
+ * @param arrayLength Number of elements in the array
+ */
+void sort_array(uint8_t *ptr, uint8_t length);
+
+/**
+ * @brief Given an array pointer and length of array, returns the minimum value in the array
+ * 
+ * @param arrayPtr Pointer to the array of data
+ * @param arrayLength Number of elements in the array
+ * @return uint8_t minimum value in array
+ */
+uint8_t find_minimum(uint8_t *ptr, uint8_t length);
+
+/**
+ * @brief Given an array pointer and length of array, returns the maximum value in the array
+ * 
+ * @param arrayPtr Pointer to the array of data
+ * @param arrayLength Number of elements in the array
+ * @return uint8_t maximum value in array
+ */
+uint8_t find_maximum(uint8_t *ptr, uint8_t length);
+
+/**
+ * @brief Given an array pointer and length of array, returns the average value of the array
+ * 
+ * @param arrayPtr Pointer to the array of data
+ * @param arrayLength Number of elements in the array
+ * @return uint8_t average value in array
+ */
+uint8_t find_mean(uint8_t *ptr, uint8_t length);
+
+/**
+ * @brief Given an array pointer and length of array, returns the median value of the array
+ * 
+ * @param arrayPtr Pointer to the array of data
+ * @param arrayLength Number of elements in the array
+ * @return uint8_t median value in array
+ */
+uint8_t find_median(uint8_t *ptr, uint8_t length);
 
 
 #endif /* __STATS_H__ */

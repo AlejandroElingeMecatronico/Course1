@@ -9,11 +9,10 @@
  *
  *****************************************************************************/
 /**
- * @file main.c
- * @brief 
- *
- * @author 
- * @date
+ *@file main.c 
+ * @brief This file is the main file for the final assessment of course1.
+ * @author AlejandroElingeMecatronico
+ * @date 12-09-21
  *
  */
 
@@ -23,14 +22,15 @@
 #include "memory.h"
 #include "stats.h"
 #include "data.h"
+#include "course1.h"
 
-int main ()
-{
+int main(){
     #ifdef COURSE1
-        printf("calling course1()\n");
-        course1();  
-        return 0;
+        course1();
+        return 0;  
     #endif
 
     return 0;
 }
+
+

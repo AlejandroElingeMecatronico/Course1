@@ -12,8 +12,8 @@
  * @file course1.h 
  * @brief This file is to be used to course 1 final assessment.
  *
- * @author Alex Fosdick
- * @date April 2, 2017
+ * @author AlejandroElingeMecatronico
+ * @date 12-09-21
  *
  */
 #ifndef __COURSE1_H__
@@ -30,6 +30,8 @@
 #define TEST_ERROR          (1)
 #define TEST_NO_ERROR       (0)
 #define TESTCOUNT           (8)
+
+enum base{BASE_2=2, BASE_10=10, BASE_16=16};
 
 /**
  * @brief function to run course1 materials

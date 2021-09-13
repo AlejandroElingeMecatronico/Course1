@@ -8,12 +8,16 @@
 # misuse of this material. 
 #
 #*****************************************************************************
-
-# Add your Source files to this variable
 SOURCES = 		./src/main.c \
 				./src/memory.c \
-				./src/course1.c \
-				./src/stats.c 			
-# Add your include paths to this variable
-INCLUDES = -I/include/msp432 -I/include/common -I/include/CMSIS 
+				./src/stats.c \
+				./src/data.c \
+				./src/course1.c 			
 
+ifeq ($(PLATFORM),MSP432)
+	INCLUDES = 	-I include/msp432\
+				-I include/common\
+				-I include/CMSIS 
+else
+	INCLUDES = -I include/common 
+endif

@@ -20,8 +20,15 @@
 # Platform Overrides:
 #      <Put a description of the supported Overrides here
 #
+#
+#
+#
+#@author AlejandroElingeMecatronico
+#@date 12-09-21
 #------------------------------------------------------------------------------
 include sources.mk
+
+SHELL=/bin/bash
 
 PLATFORM=HOST
 VERBOSE=VERBOSE
@@ -29,17 +36,17 @@ COURSE1=COURSE1
 
 #FLAGS_BOTH 
 CFLAGS_BOTH= -g \
-				-Werror \
 				-std=c99 \
 				-O0 \
-				-Wall 
+				-Wall \
+				#-Werror
 #TARGET FOT BOTH
 TARGET = final_assessment
 
 # Platform ARM
 ifeq ($(PLATFORM),MSP432)
 	#ARCHITECTURE and SPECIFICS FLAGS ARM
-	LINKER_FILE = ../msp432p401r.lds
+	LINKER_FILE = ./msp432p401r.lds
 	CPU = cortex-m4
 	ARCH_FLAGS = -mthumb\
 	             -march=armv7e-m\
@@ -50,7 +57,7 @@ ifeq ($(PLATFORM),MSP432)
 	CFLAGS_ARCH = -mcpu=$(CPU) $(ARCH_FLAGS) 
 	CFLAGS = $(CFLAGS_BOTH) $(ARCH_FLAGS)
 	LDFLAGS_ARCH = -T $(LINKER_FILE)
-	LDFLAGS = -Wl,-Map=$(TARGET).map $(LDFLAGS_ARCH)
+	LDFLAGS = -Wl,-Map=$(TARGET).map $(LDFLAGS_ARCH) -lm
 	CPPFLAGS = -DMSP432 $(INCLUDES)
 
 	#COMPILERFLAGS AND DEFINES ARM
@@ -58,9 +65,9 @@ ifeq ($(PLATFORM),MSP432)
 	LD = arm-none-eabi-ld
 	SIZE = arm-none-eabi-size
 
-	SOURCES += 		./startup_msp432p401r_gcc.c\
-					./system_msp432p401r.c\
-					./interrupts_msp432p401r_gcc.c			
+	SOURCES += 	./src/startup_msp432p401r_gcc.c\
+				./src/system_msp432p401r.c\
+				./src/interrupts_msp432p401r_gcc.c			
 endif
 
 ifeq ($(PLATFORM),HOST)
@@ -68,9 +75,18 @@ ifeq ($(PLATFORM),HOST)
 	CC = gcc
 	CFLAGS = $(CFLAGS_BOTH)
 	CPPFLAGS = -DHOST $(INCLUDES)
-	LDFLAGS = -Wl,-Map=$(TARGET).map
+	LDFLAGS = -Wl,-Map=$(TARGET).map -lm
 	SIZE = size
 endif
+
+ifeq ($(COURSE1),COURSE1)
+	CPPFLAGS += -DCOURSE1
+endif
+
+ifeq ($(VERBOSE),VERBOSE)
+	CPPFLAGS += -DVERBOSE
+endif		
+
 
 OBJS = $(SOURCES:.c=.o) #objects files
 ASM = $(SOURCES:.c=.asm) #assembler files
@@ -103,7 +119,8 @@ compile-all: $(OBJS)
 
 .PHONY:clean
 clean :
-	rm -f *.o *.i *.s *.out *.map
+	@echo Removing all built files
+	rm -f ./src/*{.o,.out,.map,.asm,.i} $(TARGET).out
 	
 
 
